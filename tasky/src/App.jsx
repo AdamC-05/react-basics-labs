@@ -1,6 +1,7 @@
 import './App.css';
 import Task from './components/Task';
 import React, { useState } from 'react';
+import AddTaskForm from './components/Form';
 
 function App() {
       const [ taskState, setTaskState ] = useState({
@@ -18,6 +19,13 @@ function App() {
     console.log(`${taskIndex} ${tasks[taskIndex].done}`);
   }
 
+    const deleteHandler = (taskIndex) => {
+    const tasks = [...taskState.tasks];
+    tasks.splice(taskIndex, 1);
+    setTaskState({tasks});
+  } 
+
+
 
 
     return (
@@ -32,9 +40,11 @@ function App() {
       key={task.id}
       done={task.done}
       markDone={() => doneHandler(index)}
+      deleteTask = {() => deleteHandler(index)}
+
     />
   ))}
-
+  <AddTaskForm />
 
     </div>
   );
